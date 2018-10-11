@@ -20,7 +20,22 @@ jQuery(function($){
 			console.log('Ops... algo deu errado na requisição');
 		})
 	}
-	//listarPostsAjax();
+	
+
+	//Ação do botão da categoria
+	$('.list-group-item').on('click', function(){
+		listarPostsAjax();
+		$('.list-group-item').removeClass('active'); //todas as categorias não ficam ativas
+		$(this).addClass('active'); //a categoria clicada fica ativa
+	});
+
+	//Ação do botão da paginação
+	$('.page-item').on('click', function(){
+		listarPostsAjax();
+		$('.page-item').removeClass('active'); 
+		$(this).addClass('active'); 
+	});
+
 	/*******************************
 	* Detalhes do Post
 	*******************************/
@@ -44,6 +59,11 @@ jQuery(function($){
 	}
 	//detalhesPostAjax();
 
+	//Ação do botão leia mais
+	$('.btn-detalhes').on('click', function(){
+		detalhesPostAjax();
+	});
+
 	/*******************************
 	* Curtir e descurtir post
 	*******************************/	
@@ -65,5 +85,10 @@ jQuery(function($){
 			console.log('Ops... algo deu errado na requisição');
 		})
 	}
-	curtirPostToggleAjax();
+	//curtirPostToggleAjax();
+
+	//Ação do botão curtir
+	$('.btn-curtir').on('click', function(){
+		curtirPostToggleAjax();
+	});
 })
