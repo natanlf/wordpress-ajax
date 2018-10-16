@@ -36,6 +36,19 @@ jQuery(function($){
 		$(this).addClass('active'); 
 	});
 
+	//Ação do botão limpar busca
+	$('#btn-limpar').on('click', function(){
+		listarPostsAjax();
+		$(this).addClass('d-none'); //d-none esconde o botão
+		$('#campo-busca').val('');
+	});
+
+	//Ação ao digitar uma palavra na busca
+	$('#campo-busca').on('keyup', function(){ //quando aperto uma tecla e solto tenho o evento keyup
+		listarPostsAjax();
+		$('#btn-limpar').removeClass('d-none'); //mostra o botão
+	});
+
 	/*******************************
 	* Detalhes do Post
 	*******************************/
