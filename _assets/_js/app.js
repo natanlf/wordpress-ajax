@@ -15,12 +15,13 @@ jQuery(function($){
 		})
 		.done(function(resposta){
 			$('.progress').addClass('d-none');
+			$('#lista-posts').html(resposta);
 		})
 		.fail(function(){
 			console.log('Ops... algo deu errado na requisição');
 		})
 	}
-	
+	listarPostsAjax();
 
 	//Ação do botão da categoria
 	$('.list-group-item').on('click', function(){
