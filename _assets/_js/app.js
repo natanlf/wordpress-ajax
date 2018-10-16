@@ -10,11 +10,11 @@ jQuery(function($){
 			data: {
 				action: 'listarPosts' //chama nossa função php
 			}, beforeSend:function(){
-				console.log('Carregando posts...');
+				$('.progress').removeClass('d-none');
 			}
 		})
 		.done(function(resposta){
-			console.log(resposta);
+			$('.progress').addClass('d-none');
 		})
 		.fail(function(){
 			console.log('Ops... algo deu errado na requisição');
@@ -60,11 +60,11 @@ jQuery(function($){
 			data: {
 				action: 'detalhesPost' 
 			}, beforeSend:function(){
-				console.log('Carregando detalhes do post...');
+				$('.progress').removeClass('d-none');
 			}
 		})
 		.done(function(resposta){
-			console.log(resposta);
+			$('.progress').addClass('d-none');
 		})
 		.fail(function(){
 			console.log('Ops... algo deu errado na requisição');
@@ -88,11 +88,11 @@ jQuery(function($){
 			data: {
 				action: 'curtirPostToggle' 
 			}, beforeSend:function(){
-				console.log('Curtindo post...');
+				$('.progress').removeClass('d-none');
 			}
 		})
 		.done(function(resposta){
-			console.log(resposta);
+			$('.progress').addClass('d-none');
 		})
 		.fail(function(){
 			console.log('Ops... algo deu errado na requisição');
