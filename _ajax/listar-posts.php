@@ -2,10 +2,12 @@
 
 function listarPosts(){
 
+	$page = $_GET['page']; //recebo a pagina
+
 	$args = [
 		'post_type' => 'post',
 		'posts_per_page' => 2,
-		'paged' => 2
+		'paged' => ($page) ? $page : 1 //caso não tenha recebido pagina o default é a pagina 1
 	];
 
 	$posts = new WP_Query($args);
@@ -33,13 +35,14 @@ function listarPosts(){
 					<!-- fim item -->
 					<?php endwhile; ?>
 				</div>
+				<!-- Faz um loop no total de páginas e deixa a página corrent com a classe active -->
 				<!-- paginacao -->
 				<?php if($totalPages > 0): ?>
 					<section class="paginacao">
 						<nav aria-label="Page navigation example">
 							<ul class="pagination">
 								<?php for($i=1; $i<= $totalPages; $i++): ?>
-									<li class="page-item <?php echo ($i == 1)? 'active' : '' ?>"><span class="page-link"><?php echo $i; ?></a></li>
+									<li class="page-item <?php echo ($i == $page)? 'active' : '' ?>"><span class="page-link"><?php echo $i; ?></a></li>
 								<?php endfor; ?>	
 							</ul>
 						</nav>

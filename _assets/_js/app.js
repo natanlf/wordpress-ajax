@@ -3,12 +3,15 @@ jQuery(function($){
 	* Listar Posts
 	*******************************/
 
-	var listarPostsAjax = function(){
+	var page = 1;
+
+	var listarPostsAjax = function(page){
 		$.ajax({
 			url: wp.ajaxurl, //wp é o objeto e ajaxurl é a key
 			type: 'GET',
 			data: {
-				action: 'listarPosts' //chama nossa função php
+				action: 'listarPosts', //chama nossa função php
+				page: page
 			}, beforeSend:function(){
 				$('.progress').removeClass('d-none');
 			}
@@ -21,7 +24,7 @@ jQuery(function($){
 			console.log('Ops... algo deu errado na requisição');
 		})
 	}
-	listarPostsAjax();
+	listarPostsAjax(page);
 
 	//Ação do botão da categoria
 	$('.list-group-item').on('click', function(){
@@ -31,8 +34,9 @@ jQuery(function($){
 	});
 
 	//Ação do botão da paginação
-	$('.page-item').on('click', function(){
-		listarPostsAjax();
+	$('body').on('click', '.page-item', function(){ //pega o numero do botao selecioando para paginar
+		page = $(this).find('span').text();
+		listarPostsAjax(page);
 		$('.page-item').removeClass('active'); 
 		$(this).addClass('active'); 
 	});
