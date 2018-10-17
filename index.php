@@ -37,19 +37,7 @@
 			</section>
 			<!-- fim lista posts -->
 
-			<!-- paginacao -->
-			<section class="paginacao">
-				<nav aria-label="Page navigation example">
-					<ul class="pagination">
-						<li class="page-item active"><span class="page-link">1</a></li>
-						<li class="page-item"><span class="page-link">2</a></li>
-						<li class="page-item"><span class="page-link">3</a></li>
-						<li class="page-item"><span class="page-link">4</a></li>
-						<li class="page-item"><span class="page-link">5</a></li>
-					</ul>
-				</nav>
-			</section>
-			<!-- fim paginacao -->
+			
 
 		</div>
 		<div class="col-md-3">

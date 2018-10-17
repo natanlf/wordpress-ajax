@@ -4,11 +4,12 @@ function listarPosts(){
 
 	$args = [
 		'post_type' => 'post',
-		'posts_per_page' => 2 
+		'posts_per_page' => 2,
+		'paged' => 2
 	];
 
 	$posts = new WP_Query($args);
-
+	$totalPages = $posts->max_num_pages;
 	?>
 
 		<?php if($posts->have_posts()): ?>
@@ -32,6 +33,19 @@ function listarPosts(){
 					<!-- fim item -->
 					<?php endwhile; ?>
 				</div>
+				<!-- paginacao -->
+				<?php if($totalPages > 0): ?>
+					<section class="paginacao">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+								<?php for($i=1; $i<= $totalPages; $i++): ?>
+									<li class="page-item <?php echo ($i == 1)? 'active' : '' ?>"><span class="page-link"><?php echo $i; ?></a></li>
+								<?php endfor; ?>	
+							</ul>
+						</nav>
+					</section>
+				<?php endif; ?>
+				<!-- fim paginacao -->
 		<?php else : ?>
 			<div class="alert alert-danger">Nenhum conteúdo encontrado.</div>
 		<?php endif ?>
