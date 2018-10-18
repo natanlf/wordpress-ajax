@@ -4,14 +4,17 @@ jQuery(function($){
 	*******************************/
 
 	var page = 1;
+	//pega a categoria que estiver ativa
+	var slug = $('.list-group-item.active').data('slug'); //slug da categoria para filtrar os posts da categoria
 
-	var listarPostsAjax = function(page){
+	var listarPostsAjax = function(page, slug){
 		$.ajax({
 			url: wp.ajaxurl, //wp é o objeto e ajaxurl é a key
 			type: 'GET',
 			data: {
 				action: 'listarPosts', //chama nossa função php
-				page: page
+				page: page,
+				slug: slug
 			}, beforeSend:function(){
 				$('.progress').removeClass('d-none');
 			}
@@ -24,11 +27,12 @@ jQuery(function($){
 			console.log('Ops... algo deu errado na requisição');
 		})
 	}
-	listarPostsAjax(page);
+	listarPostsAjax(page, slug);
 
 	//Ação do botão da categoria
 	$('.list-group-item').on('click', function(){
-		listarPostsAjax();
+		slug = $(this).data('slug'); //pega o slug da categoria
+		listarPostsAjax(1, slug); //precisamos passar sempre a página um quando clicar em alguma categoria
 		$('.list-group-item').removeClass('active'); //todas as categorias não ficam ativas
 		$(this).addClass('active'); //a categoria clicada fica ativa
 	});
@@ -36,14 +40,14 @@ jQuery(function($){
 	//Ação do botão da paginação
 	$('body').on('click', '.page-item', function(){ //pega o numero do botao selecioando para paginar
 		page = $(this).find('span').text();
-		listarPostsAjax(page);
+		listarPostsAjax(page, slug); //devo passar o slug da categoria para a paginação ficar correta
 		$('.page-item').removeClass('active'); 
 		$(this).addClass('active'); 
 	});
 
 	//Ação do botão limpar busca
 	$('#btn-limpar').on('click', function(){
-		listarPostsAjax();
+		listarPostsAjax(1); //passamos a página ao limpar a busca
 		$(this).addClass('d-none'); //d-none esconde o botão
 		$('#campo-busca').val('');
 	});

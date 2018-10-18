@@ -3,11 +3,13 @@
 function listarPosts(){
 
 	$page = $_GET['page']; //recebo a pagina
+	$slug = $_GET['slug']; //slug da categoria
 
 	$args = [
 		'post_type' => 'post',
 		'posts_per_page' => 2,
-		'paged' => ($page) ? $page : 1 //caso não tenha recebido pagina o default é a pagina 1
+		'paged' => ($page) ? $page : 1, //caso não tenha recebido pagina o default é a pagina 1
+		'category_name' => $slug
 	];
 
 	$posts = new WP_Query($args);
